@@ -8,7 +8,7 @@ interface IState {
   count: number,
 }
 class StateCom extends Component<IProps, IState> {
-  public state = {
+  public readonly state: Readonly<IState> = {
     count: 1
   }
   public render () {
@@ -16,4 +16,8 @@ class StateCom extends Component<IProps, IState> {
       <div>Hello world</div>
     )
   }
+  public componentDidMount() {
+      this.state.count = 2  // 无法为“count”赋值，因为它是只读属性
+  }
 }
+export default StateCom
