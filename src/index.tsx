@@ -1,10 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import Card from './Card/Card'
+// import App from './App';
+// import Card from './Card/Card'
 import reportWebVitals from './reportWebVitals';
-import FirstTsx from './FirstTsx';
+// import FirstTsx from './FirstTsx';
+import FunctionCom from './FunctionCom'
+
+
+interface IResponse<T> {
+  message: string,
+  result: T,
+  success: boolean
+}
+
+async function getResponse(): Promise<IResponse<number[]>> {
+  return {
+    message: '获取成功',
+    result: [1, 2, 3],
+    success: true
+  }
+}
+
+// 限制props.color的值只可以是字符串 red、blue、yellow
+// interface IProps {
+//   color: 'red' | 'blue' | 'yellow'
+// }
+
+// 使用数字字面量类型限制值为固定的数值参数 限制IProps.index的值只可以是数字0、1、2
+// interface IProps {
+//   index: 0 | 1 | 2
+// }
+
+// type Partial<T> = { [P in keyof T]?: T[P] }
+
+interface Person {
+  name: string,
+  age: number,
+  sex: string,
+}
+let person: Omit<Person, 'name'> = {
+  age: 1,
+  sex: '男'
+}
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,7 +54,16 @@ root.render(
     {/* <Card title='我是卡片' onClick={()=>{alert(111)}}>
       <div>123</div>
     </Card> */}
-    <FirstTsx />
+    {/* <FirstTsx /> */}
+    {/* <FunctionCom onClick={() => {
+      getResponse().then(response => {
+        console.log(response.result)
+      })
+    }}
+      color='blue'
+    >
+      {123}
+    </FunctionCom> */}
   </React.StrictMode>
 );
 

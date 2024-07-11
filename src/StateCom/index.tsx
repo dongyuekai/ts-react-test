@@ -17,7 +17,7 @@ class StateCom extends Component<IProps, IState> {
     )
   }
   public componentDidMount() {
-      this.state.count = 2  // 无法为“count”赋值，因为它是只读属性
+      // this.state.count = 2  // 无法为“count”赋值，因为它是只读属性
   }
 }
 export default StateCom
