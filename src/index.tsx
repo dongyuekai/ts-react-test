@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
@@ -44,6 +44,30 @@ let person: Omit<Person, 'name'> = {
   sex: '男'
 }
 
+const ControledCom: React.FC = () => {
+  const [files, setFiles] = useState<File | null>(null)
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFiles(e.target.files?.[0]!)
+  }
+  return (
+    <div>
+      <input type="file" onChange={handleChange} />
+      {files && <div>{files.name}</div>}
+    </div>
+  )
+}
+const UnControledCom: React.FC = () => {
+  const inputRef = useRef<HTMLInputElement>(null)
+  const handleChange = () => {
+    console.log('dyk---', inputRef.current?.files)
+  }
+  return (
+    <div>
+      <input type="file" ref={inputRef} onChange={handleChange} />
+      {inputRef.current?.files?.[0]?.name}
+    </div>
+  )
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -64,6 +88,7 @@ root.render(
     >
       {123}
     </FunctionCom> */}
+    <UnControledCom />
   </React.StrictMode>
 );
 
